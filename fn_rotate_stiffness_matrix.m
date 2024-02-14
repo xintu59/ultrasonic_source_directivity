@@ -1,0 +1,39 @@
+function new_stiffness_matrix = fn_rotate_stiffness_matrix(old_stiffness_matrix, phi, theta, psi)
+%SUMMARY
+%   Rotates stiffness matrix
+%USAGE
+%   new_stiffness_matrix = fn_rotate_stiffness_matrix(old_stiffness_matrix, phi, theta, psi)
+%INPUTS
+%   phi - 
+%   theta - 
+%   psi - 
+%OUTPUTS
+%   new_stiffness_matrix - rotated stiffness matrix
+%AUTHOR
+%   ????
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+M = fn_phi_psi_matrix(phi) * fn_theta_matrix(theta) * fn_phi_psi_matrix(psi);
+new_stiffness_matrix = M * old_stiffness_matrix * M';
+return
+
+function m = fn_phi_psi_matrix(a)
+m = [...
+    [    cos(a)^2,      sin(a)^2, 0,       0,      0, -sin(2*a)]; ...
+    [    sin(a)^2,      cos(a)^2, 0,       0,      0,  sin(2*a)]; ...
+    [           0,             0, 1,       0,      0,         0]; ...
+    [           0,             0, 0,  cos(a), sin(a),         0]; ...
+    [           0,             0, 0, -sin(a), cos(a),         0]; ...
+    [0.5*sin(2*a), -0.5*sin(2*a), 0,       0,      0,  cos(2*a)]];
+return;
+
+function m = fn_theta_matrix(a)
+%sasha corrections applied 19/5/5 - not checked with Disperse yet
+m = [...
+    [     cos(a)^2, 0,     sin(a)^2,      0,  sin(2*a),       0]; ...
+    [            0, 1,            0,      0,         0,       0]; ...
+    [     sin(a)^2, 0,     cos(a)^2,      0, -sin(2*a),       0]; ...
+    [            0, 0,            0, cos(a),         0, -sin(a)]; ...
+    [-0.5*sin(2*a), 0, 0.5*sin(2*a),      0,  cos(2*a),       0]; ...
+    [            0, 0,            0, sin(a),         0,  cos(a)]];
+return;
