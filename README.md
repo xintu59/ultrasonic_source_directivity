@@ -1,4 +1,4 @@
-Calculates the analytical solution of directivities for various ultrasonic sources in various materials (including anisotropic and layered media).
+Calculates the analytical solution of directivities for various ultrasonic sources in various materials (including anisotropic and layered media), refer to directivity_general_case_example.m
 
 Citation:
 Xin L. Tu, Jie Zhang, Alberto M. Gambaruto, Paul D. Wilcox,
